@@ -35,7 +35,7 @@ def index(request):
         },
     ]
 
-    return render(request,'cac/index.html',{
+    return render(request,'cac/publica/index.html',{
                                     'titulo_nombre':titulo,
                                     'cursos':listado_cursos,
                                     'parametros':parameters_get,
@@ -45,14 +45,14 @@ def index(request):
 def quienes_somos(request):
     #return redirect('saludar_por_defecto')
     #return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
-    template = loader.get_template('cac/quienes_somos.html')
+    template = loader.get_template('cac/publica/quienes_somos.html')
     context = {'titulo':'Codo a Codo - Quienes Somos'}
     return HttpResponse(template.render(context,request))
 
 def blog(request):
     #return redirect('saludar_por_defecto')
     #return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
-    template = loader.get_template('cac/blog.html')
+    template = loader.get_template('cac/publica/blog.html')
     context = {'titulo':'Blog'}
     return HttpResponse(template.render(context,request))   
     
