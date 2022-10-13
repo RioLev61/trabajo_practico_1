@@ -21,103 +21,75 @@
 
 <!-- Portfolio Section -->
 
-<section id="portfolio">
-     <div class="container">
-          <div class="row">
-
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img1.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Brand Identity</small>
+<section id="portfolio ">
+     <div class="container">         
+               {% if proyectos|length > 0 %}
+               {% for proyecto in proyectos %}
+               <div class="row">
+                    
+                    <div class="col-md-4 col-sm-6">
+                         <div class="single-project.html">
+                             
+                                   <div class="portfolio-thumb">
+                                        <img src='{{proyecto.imagen}}'' class="img-responsive"
+                                             alt="Portfolio">
+                                        <div class="portfolio-overlay">
+                                             <div class="portfolio-item">
+                                                  <a href="{{proyecto.website}}">
+                                                       <h3>{{proyecto.nombre}}</h3>
+                                                  </a>
+                                                  <small>{{proyecto.categoria}}</small>
+                                             </div>
+                                        </div>
                                    </div>
-                              </div>
+
+                              </a>
                          </div>
-                    </a>
+                    </div>
+                    {% endfor %}
                </div>
-
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img2.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Web Development</small>
-                                   </div>
-                              </div>
+               {% else %}
+               <div class="row justify-content-center">
+                    <div class="col-4 text-center">
+                         <div class="alert alert-warning" role="alert">
+                              <p>No hay proyectos disponibles</p>
                          </div>
-                    </a>
-               </div>
+                    </div>
 
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img3.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Mobile App</small>
-                                   </div>
-                              </div>
-                         </div>
-                    </a>
-               </div>
-
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img4.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Logo Design</small>
-                                   </div>
-                              </div>
-                         </div>
-                    </a>
-               </div>
-
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img5.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Social marketing</small>
-                                   </div>
-                              </div>
-                         </div>
-                    </a>
-               </div>
-
-               <div class="col-md-4 col-sm-6">
-                    <a href="single-project.html">
-                         <div class="portfolio-thumb">
-                              <img src="/static/img/portfolio-img6.jpg" class="img-responsive" alt="Portfolio">
-                              <div class="portfolio-overlay">
-                                   <div class="portfolio-item">
-                                        <h3>Nombre del Proyecto</h3>
-                                        <small>Fyler Design</small>
-                                   </div>
-                              </div>
-                         </div>
-                    </a>
+                    {% endif %}
                </div>
 
                <div class="col-md-12 col-sm-12 text-center">
                     <h3>Si estas interesado podes contactarte <a href="contact.html">contact page</a></h3>
                </div>
 
-          </div>
+          
      </div>
 </section>
 
 {% endblock contenido %}
+
+
+
+<!--<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<!--   <h1>{{ titulo_nombre }}</h1>
+    <p>{{ parametros }}</p>    
+    <p>{{ hoy|date:"Y-m-d H:i:s"}}</p>
+    
+    {% if cursos|length > 0 %}
+        <ul>
+            {% for curso in cursos %}
+                <li>
+                    {{ curso.nombre }} - {{ curso.categoria }}
+                    <p>{{ curso.descripcion }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay cursos disponibles</p>
+    {% endif %}-->
 
 
 
