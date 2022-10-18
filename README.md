@@ -1,5 +1,5 @@
 # trabajo_practico_1
-Integrantes.
+Integrantes grupo 13
 Martin Lopez, 
 Juan Piñeiro, 
 Dario Levenson
