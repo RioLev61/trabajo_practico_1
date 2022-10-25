@@ -5,10 +5,10 @@ urlpatterns = [
     path('',views.index,name='inicio'),
     path('quienessomos/',views.quienes_somos,name='quienes_somos'),
     path('blog/',views.blog,name='blog'),
-    path('admin',views.index_admin,name='inicio_admin')
+    path('admin',views.index_admin,name='inicio_admin'),
 
 
-    
+
     path('hola_mundo',views.hola_mundo),
     path('saludarbonito/',views.saludar,name="saludar_por_defecto"),
     path('saludar/<str:nombre>',views.saludar,name="saludar"),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('proyectos/<int:anio>/<int:mes>',views.ver_proyectos,name="ver_proyectos"),
     path('cursos/detalle/<slug:nombre_curso>',views.cursos_detalle, name="curso_detalle"),
     re_path(r'^cursos/(?P<nombre>\w+)/$',views.cursos,name="cursos")
+
 ]
