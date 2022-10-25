@@ -91,6 +91,10 @@ def blog(request):
     context = {'titulo': 'Blog'}
     return HttpResponse(template.render(context, request))
 
+def index_admin(request):
+    variable = 'test_variable'
+    return render(request,'cac/admin/index_admin.html',{'variable':variable})
+
 
 # Create your views here.
 def hola_mundo(request):
