@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.template import loader
+from cac.forms import ContactoForm
+
+from django.contrib import messages
 
 
 def index(request):
@@ -77,20 +80,26 @@ def index(request):
 
 
 def quienes_somos(request):
-    # return redirect('saludar_por_defecto')
-    # return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
     template = loader.get_template('cac/publica/quienes_somos.html')
     context = {'titulo': 'Codo a Codo - Quienes Somos'}
     return HttpResponse(template.render(context, request))
 
 
 def blog(request):
-    # return redirect('saludar_por_defecto')
-    # return redirect(reverse('saludar', kwargs={'nombre':'Juliana'}))
     template = loader.get_template('cac/publica/blog.html')
     context = {'titulo': 'Blog'}
     return HttpResponse(template.render(context, request))
 
+def contacto(request):
+    template = loader.get_template('cac/publica/contacto.html')
+    context = {'titulo': 'Contacto'}
+    return HttpResponse(template.render(context, request))
+
+
+
+
+
+   
 def index_admin(request):
     variable = 'test_variable'
     return render(request,'cac/admin/index_admin.html',{'variable':variable})

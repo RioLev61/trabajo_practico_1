@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+
+{% block titulo %}Contacto{% endblock titulo %}
+{% block contenido %}
+
+<div class="col-md-6 mb-md-0 mb-6">
+
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+
+    <form novalidate id="contact-form" name="contact-form" action="{% url 'contacto' %}" method="POST">
+        {% csrf_token %}
+
+        {% comment %} {{ contacto_form }} {% endcomment %}
+
+        {% comment %} <table>
+            {{ contacto_form.as_table }}
+        </table> {% endcomment %}
+
+        {% comment %} <ul>
+            {{ contacto_form.as_ul }}
+        </ul> {% endcomment %}
+        {% comment %} {{ contacto_form.as_p }} {% endcomment %}
+        <div class="row">
+            {% for campo in contacto_form %}
+                <div class="col-md-12">
+                    <div class="md-form mb-0">
+                        <label for="">{{campo.label}}</label>
+                        {{campo}}
+                    </div>
+                    <div>{{campo.errors}}</div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center text-md-left mt-3">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+    </form>
+    <div class="status"></div>
+</div>
+
+{% endblock contenido %}
