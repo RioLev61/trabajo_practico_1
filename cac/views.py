@@ -91,9 +91,14 @@ def blog(request):
     return HttpResponse(template.render(context, request))
 
 def contacto(request):
-    template = loader.get_template('cac/publica/contacto.html')
-    context = {'titulo': 'Contacto'}
-    return HttpResponse(template.render(context, request))
+    #template = loader.get_template('cac/publica/contacto.html')
+    #context = {'titulo': 'Contacto'}
+    #return HttpResponse(template.render(context, request))
+    if request.method =="POST":
+        contacto_form = ContactoForm(request.POST)
+    else:
+        contacto_form = ContactoForm()
+    return render(request,'cac/publica/contacto.html',{'contacto_form': contacto_form})
 
 
 

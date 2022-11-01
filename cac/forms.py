@@ -41,7 +41,7 @@ class ContactoForm(forms.Form):
             max_length=500,
             widget=forms.Textarea(attrs={'class':'form-control','rows':5}))
     suscripcion = forms.BooleanField(
-        label='Deseo suscribirme a las novedades de codo a codo',
+        label='Deseo suscribirme al Blog de Magnet',
         required=False,
         widget=forms.CheckboxInput(attrs={'class':'form-check-input','value':1})
     )

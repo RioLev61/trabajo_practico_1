@@ -14,17 +14,6 @@
 
     <form novalidate id="contact-form" name="contact-form" action="{% url 'contacto' %}" method="POST">
         {% csrf_token %}
-
-        {% comment %} {{ contacto_form }} {% endcomment %}
-
-        {% comment %} <table>
-            {{ contacto_form.as_table }}
-        </table> {% endcomment %}
-
-        {% comment %} <ul>
-            {{ contacto_form.as_ul }}
-        </ul> {% endcomment %}
-        {% comment %} {{ contacto_form.as_p }} {% endcomment %}
         <div class="row">
             {% for campo in contacto_form %}
                 <div class="col-md-12">
