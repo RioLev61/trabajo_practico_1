@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.template import loader
-from cac.forms import ContactoForm
+from cac.forms import ContactoForm, CategoriaForm
 
 from django.contrib import messages
 from cac.models import Categoria
