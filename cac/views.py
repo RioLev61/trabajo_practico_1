@@ -9,6 +9,7 @@ from django.template import loader
 from cac.forms import ContactoForm
 
 from django.contrib import messages
+from cac.models import Categoria
 
 
 def index(request):
@@ -108,6 +109,31 @@ def contacto(request):
 def index_admin(request):
     variable = 'test_variable'
     return render(request,'cac/admin/index_admin.html',{'variable':variable})
+
+def categorias_index(request):
+    #queryset
+    categorias = Categoria.objects.filter(baja=False)
+    return render(request,'cac/admin/categorias/index.html',{'categorias':categorias})
+
+def categorias_nuevo(request):
+    if(request.method=='POST'):
+        formulario = CategoriaForm(request.POST)
+        if formulario.is_valid():
+            nombre = formulario.cleaned_data['nombre']
+            nueva_categoria = Categoria(nombre=nombre)
+            nueva_categoria.save()
+            return redirect('categorias_index')
+    else:
+        formulario = CategoriaForm()
+    return render(request,'cac/admin/categorias/nuevo.html',{'formulario':formulario})
+
+def categorias_eliminar(request,id_categoria):
+    try:
+        categoria = Categoria.objects.get(pk=id_categoria)
+    except Categoria.DoesNotExist:
+        return render(request,'cac/admin/404_admin.html')
+    categoria.soft_delete()
+    return redirect('categorias_index')
 
 
 # Create your views here.
