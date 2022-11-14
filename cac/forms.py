@@ -1,5 +1,10 @@
 from django import forms
 from django.forms import ValidationError
+from .models import Categoria
+from .models import Usuario
+from .models import Posteo
+from .models import Comentarios
+
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value ):
@@ -69,11 +74,51 @@ class ContactoForm(forms.Form):
             self.add_error('asunto', msg)
 
 
+class UsuarioForm(forms.Form):
+    class Meta:
+    model=Usuario
+    fields='__all__'
+
+
+class PosteoForm(forms.Form):
+    class Meta:
+    model=Posteo
+    fields='__all__'
+
+
+class ComentariosForm(forms.Form):
+    class Meta:
+    model=Comentarios
+    fields='__all__'
+
+
+
+
+
+
+
 class CategoriaForm(forms.Form):
 
-    nombre = forms.CharField(
-            label='Nombre', 
-            max_length=50,
-            validators=(solo_caracteres,),
-            widget=forms.TextInput(attrs={'class':'form-control'})
-        )
+      # nombre = forms.CharField(error_messages={'required':'Hello! no te olvide de mi!'})
+
+    class Meta:
+        model=Categoria
+        # fields='__all__'
+        fields=['nombre']
+        #exclude=('baja',)
+        widgets = {
+            'nombre' : forms.TextInput(attrs={'class':'form-control','placeholder':'Ingrese un nombre'})
+        }
+        error_messages = {
+            'nombre' :{
+                'required':'No te olvides de mi!'
+            }
+        }
+
+class CategoriaFormValidado(CategoriaForm):
+
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        if nombre.upper() == 'ORIGAMI':
+            raise ValidationError('Codo a Codo no dicta cursos de esta temática')
+        return nombre
