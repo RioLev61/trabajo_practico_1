@@ -74,7 +74,7 @@ class ContactoForm(forms.Form):
             self.add_error('asunto', msg)
 
 
-class UsuarioForm(forms.Form):
+'''class UsuarioForm(forms.Form):
     class Meta:
     model=Usuario
     fields='__all__'
@@ -90,7 +90,7 @@ class ComentariosForm(forms.Form):
     class Meta:
     model=Comentarios
     fields='__all__'
-
+'''
 
 
 
