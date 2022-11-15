@@ -6,11 +6,11 @@ urlpatterns = [
     path('quienessomos/',views.quienes_somos,name='quienes_somos'),
     path('blog/',views.blog,name='blog'),
     path('contacto/',views.contacto,name='contacto'),
-    path('admin',views.index_admin,name='inicio_admin'),
-    path('admin/categorias', views.CategoriaListView.as_view(),name='categorias_index'),
-     path('admin/categorias/nuevo', views.CategoriaView.as_view(),name='categorias_nuevo'),
-     path('admin/categorias/editar/<int:id_categoria>', views.categorias_editar,name='categorias_editar'),
-    path('admin/categorias/eliminar/<int:id_categoria>', views.categorias_eliminar,name='categorias_eliminar'),
+    path('administracion/',views.index_administracion,name='inicio_administracion'),
+    path('administracion/categorias', views.CategoriaListView.as_view(),name='categorias_index'),
+    path('administracion/categorias/nuevo', views.CategoriaView.as_view(),name='categorias_nuevo'),
+    path('administracion/categorias/editar/<int:id_categoria>', views.categorias_editar,name='categorias_editar'),
+    path('administracion/categorias/eliminar/<int:id_categoria>', views.categorias_eliminar,name='categorias_eliminar'),
 
 
 

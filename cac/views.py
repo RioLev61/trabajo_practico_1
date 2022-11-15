@@ -108,14 +108,14 @@ def contacto(request):
 
 
    
-def index_admin(request):
+def index_administracion(request):
     variable = 'test_variable'
-    return render(request,'cac/admin/index_admin.html',{'variable':variable})
+    return render(request,'cac/administracion/index_administracion.html',{'variable':variable})
 
 def categorias_index(request):
     #queryset
     categorias = Categoria.objects.filter(baja=False)
-    return render(request,'cac/admin/categorias/index.html',{'categorias':categorias})
+    return render(request,'cac/administracion/categorias/index.html',{'categorias':categorias})
 
 def categorias_nuevo(request):
     if(request.method=='POST'):
@@ -125,7 +125,7 @@ def categorias_nuevo(request):
             return redirect('categorias_index')
     else:
         formulario = CategoriaFormValidado()
-    return render(request,'cac/admin/categorias/nuevo.html',{'formulario':formulario})
+    return render(request,'cac/administracion/categorias/nuevo.html',{'formulario':formulario})
 
 def categorias_editar(request,id_categoria):
     try:
@@ -146,7 +146,7 @@ def categorias_eliminar(request,id_categoria):
     try:
         categoria = Categoria.objects.get(pk=id_categoria)
     except Categoria.DoesNotExist:
-        return render(request,'cac/admin/404_admin.html')
+        return render(request,'cac/administracion/404_admin.html')
     categoria.soft_delete()
     return redirect('categorias_index')
 
