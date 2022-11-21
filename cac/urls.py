@@ -6,11 +6,18 @@ urlpatterns = [
     path('quienessomos/',views.quienes_somos,name='quienes_somos'),
     path('blog/',views.blog,name='blog'),
     path('contacto/',views.contacto,name='contacto'),
+
+
     path('administracion/',views.index_administracion,name='inicio_administracion'),
     path('administracion/categorias', views.CategoriaListView.as_view(),name='categorias_index'),
     path('administracion/categorias/nuevo', views.CategoriaView.as_view(),name='categorias_nuevo'),
     path('administracion/categorias/editar/<int:id_categoria>', views.categorias_editar,name='categorias_editar'),
     path('administracion/categorias/eliminar/<int:id_categoria>', views.categorias_eliminar,name='categorias_eliminar'),
+
+    path('administracion/posteos', views.posteos_index,name='posteos_index'),
+    path('administracion/posteos/nuevo/', views.posteos_nuevo,name='posteos_nuevo'),
+    path('administracion/posteos/editar/<int:id_curso>', views.posteos_editar,name='posteos_editar'),
+    path('administracion/posteos/eliminar/<int:id_curso>', views.posteos_eliminar,name='posteos_eliminar'),
 
 
 

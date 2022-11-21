@@ -6,7 +6,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.template import loader
-from cac.forms import ContactoForm, CategoriaForm, CategoriaFormValidado
+from cac.forms import ContactoForm, PosteoForm,CategoriaForm, CategoriaFormValidado
+from cac.models import Categoria, Posteo
 
 from django.contrib import messages
 from cac.models import Categoria
@@ -149,6 +150,44 @@ def categorias_eliminar(request,id_categoria):
         return render(request,'cac/administracion/404_admin.html')
     categoria.soft_delete()
     return redirect('categorias_index')
+
+
+def posteos_index(request):
+    posteos = Posteo.objects.all()
+    return render(request,'cac/administracion/posteos/index.html',{'posteos':posteos})
+
+def posteos_nuevo(request):
+    #forma de resumida de instanciar un formulario basado en model con los
+    #datos recibidos por POST si la petición es por POST o bien vacio(None)
+    #Si la petición es por GET
+    formulario = PosteoForm(request.POST or None,request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        messages.success(request,'Se ha creado el curso correctamente')          
+        return redirect('posteos_index')
+    return render(request,'cac/administracion/posteos/nuevo.html',{'formulario':formulario})
+
+def posteos_editar(request,id_curso):
+    try:
+        curso = Posteo.objects.get(pk=id_curso)
+    except Posteo.DoesNotExist:
+        return render(request,'cac/administracion/404_admin.html')
+    formulario = PosteoForm(request.POST or None,request.FILES or None,instance=curso)
+    if formulario.is_valid():
+        formulario.save()
+        messages.success(request,'Se ha editado el curso correctamente')          
+        return redirect('posteos_index')
+    return render(request,'cac/administracion/posteos/editar.html',{'formulario':formulario})
+
+def posteos_eliminar(request,id_curso):
+    try:
+        curso = Posteo.objects.get(pk=id_curso)
+    except Posteo.DoesNotExist:
+        return render(request,'cac/administracion/404_admin.html')
+    messages.success(request,'Se ha eliminado el curso correctamente')          
+    curso.delete()
+    return redirect('posteos_index')
+    
 
 class CategoriaListView(ListView):
     model = Categoria

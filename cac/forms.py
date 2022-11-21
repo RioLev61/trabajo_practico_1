@@ -1,10 +1,6 @@
 from django import forms
 from django.forms import ValidationError
-from .models import Categoria
-from .models import Usuario
-from .models import Posteo
-from .models import Comentarios
-
+from .models import Categoria, Usuario, Posteo, Comentarios
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value ):
@@ -74,12 +70,37 @@ class ContactoForm(forms.Form):
             self.add_error('asunto', msg)
 
 
-'''class UsuarioForm(forms.Form):
+class PosteoForm(forms.Form):
     class Meta:
-    model=Usuario
-    fields='__all__'
+        model=Posteo
+        fields= ['titulo','resumen', 'fecha', 'imagenpos', 'articulo']
 
+    nombre=forms.CharField(
+        label='Titulo', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    nombre=forms.CharField(
+        label='Resumen', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    fecha=forms.DateField(
+        label='Fecha Inicio', 
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+    )
+    articulo = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
+    )
+    """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
+    quiero mostrar en el selector"""
+    categoria = forms.ModelChoiceField(
+        queryset=Categoria.objects.filter(baja=False),
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    imagenpos = forms.ImageField(
+        widget=forms.FileInput(attrs={'class':'form-control'})
+    )
 
+'''
 class PosteoForm(forms.Form):
     class Meta:
     model=Posteo
@@ -89,10 +110,21 @@ class PosteoForm(forms.Form):
 class ComentariosForm(forms.Form):
     class Meta:
     model=Comentarios
-    fields='__all__'
+    fields= ['nombre', 'fecha_inicio', 'descripcion']
+
+    nombre=forms.CharField(
+        label='Nombre', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    fecha_inicio=forms.DateField(
+        label='Fecha Inicio', 
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+    )
+    descripcion = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
+
+
 '''
-
-
 
 
 

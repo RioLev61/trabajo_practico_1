@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -46,6 +46,13 @@ class Posteo(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha = models.DateField(auto_now=True,verbose_name='Fecha')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
+    
+    def delete(self,using=None,keep_parents=False):
+        self.portada.storage.delete(self.portada.name) #borrado fisico
+        super().delete()
 
 class Comentarios(models.Model):
     nombrec = models.CharField(max_length=50,verbose_name='NombreC')
