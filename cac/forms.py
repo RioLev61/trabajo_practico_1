@@ -70,6 +70,22 @@ class ContactoForm(forms.Form):
             self.add_error('asunto', msg)
 
 
+class UsuarioForm(forms.ModelForm):
+
+    class Meta:
+        model=Usuario
+        fields=['nombre','apellido','email','password','username']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class':'form-control'}),
+            'apellido': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.EmailInput(attrs={'class':'form-control'}),
+            'password': forms.TextInput(attrs={'class':'form-control'}),
+            'username': forms.TextInput(attrs={'class':'form-control'}),
+            
+        }
+
+
+
 class PosteoForm(forms.Form):
     class Meta:
         model=Posteo
@@ -101,10 +117,6 @@ class PosteoForm(forms.Form):
     )
 
 '''
-class PosteoForm(forms.Form):
-    class Meta:
-    model=Posteo
-    fields='__all__'
 
 
 class ComentariosForm(forms.Form):

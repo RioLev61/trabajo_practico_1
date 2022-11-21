@@ -28,9 +28,23 @@ class Categoria(models.Model):
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50,verbose_name='Nombre')
     apellido = models.CharField(max_length=100,verbose_name='Apellido')
-    username = models.CharField(max_length=20,verbose_name='Usuario')
+    username = models.CharField(max_length=20,verbose_name='Nombre de Usuario')
     email = models.EmailField(max_length=150,verbose_name='email')
     password = models.CharField(max_length=20,verbose_name='Password')
+
+    def __str__(self):
+        return f"{self.username} - {self.nombre} {self.apellido}"
+    
+    def soft_delete(self):
+        self.baja=True
+        super().save()
+    
+    def restore(self):
+        self.baja=False
+        super().save()
+    
+    class Meta():
+        verbose_name_plural = 'Usuarios'
 
 class Proyectos(models.Model):
     nombrep = models.CharField(max_length=50,verbose_name='NombreP')
@@ -51,7 +65,7 @@ class Posteo(models.Model):
         return self.nombre
     
     def delete(self,using=None,keep_parents=False):
-        self.portada.storage.delete(self.portada.name) #borrado fisico
+        self.imagenpos.storage.delete(self.imagenpos.name) #borrado fisico
         super().delete()
 
 class Comentarios(models.Model):

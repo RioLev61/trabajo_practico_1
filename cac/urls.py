@@ -19,6 +19,11 @@ urlpatterns = [
     path('administracion/posteos/editar/<int:id_curso>', views.posteos_editar,name='posteos_editar'),
     path('administracion/posteos/eliminar/<int:id_curso>', views.posteos_eliminar,name='posteos_eliminar'),
 
+    path('administracion/usuarios', views.usuarios_index,name='usuarios_index'),
+    path('administracion/usuarios/nuevo/', views.usuarios_nuevo,name='usuarios_nuevo'),
+    path('administracion/usuarios/editar/<int:id_curso>', views.usuarios_editar,name='posteos_editar'),
+    path('administracion/usuarios/eliminar/<int:id_curso>', views.usuarios_eliminar,name='posteos_eliminar'),
+
 
 
     path('hola_mundo',views.hola_mundo),
