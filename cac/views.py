@@ -6,11 +6,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.template import loader
-from cac.forms import ContactoForm, PosteoForm,CategoriaForm, CategoriaFormValidado, UsuarioForm
+from cac.forms import ContactoForm, PosteoForm,CategoriaForm,CategoriaFormValidado, UsuarioForm
 from cac.models import Categoria, Posteo, Usuario
 
 from django.contrib import messages
-from cac.models import Categoria
 from django.views.generic import ListView
 from django.views import View
 
@@ -179,9 +178,9 @@ def posteos_editar(request,id_posteo):
         return redirect('posteos_index')
     return render(request,'cac/administracion/posteos/editar.html',{'formulario':formulario})
 
-def posteos_eliminar(request,id_curso):
+def posteos_eliminar(request,id_posteo):
     try:
-        curso = Posteo.objects.get(pk=id_curso)
+        curso = Posteo.objects.get(pk=id_posteo)
     except Posteo.DoesNotExist:
         return render(request,'cac/administracion/404_admin.html')
     messages.success(request,'Se ha eliminado el post correctamente')          

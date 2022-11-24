@@ -24,7 +24,6 @@ class Categoria(models.Model):
         self.baja=False
         super().save()
 
-
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50,verbose_name='Nombre')
     apellido = models.CharField(max_length=100,verbose_name='Apellido')
@@ -46,12 +45,6 @@ class Usuario(models.Model):
     class Meta():
         verbose_name_plural = 'Usuarios'
 
-class Proyectos(models.Model):
-    nombrep = models.CharField(max_length=50,verbose_name='NombreP')
-    imagenp = models.ImageField(upload_to='#',verbose_name='ImagenP')
-    website = models.URLField()
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-
 class Posteo(models.Model):
     titulo = models.CharField(max_length=50,verbose_name='Titulo')
     resumen = models.CharField(max_length=250,verbose_name='Resumen')
@@ -67,6 +60,13 @@ class Posteo(models.Model):
     def delete(self,using=None,keep_parents=False):
         self.imagenpos.storage.delete(self.imagenpos.name) #borrado fisico
         super().delete()
+
+class Proyectos(models.Model):
+    nombrep = models.CharField(max_length=50,verbose_name='NombreP')
+    imagenp = models.ImageField(upload_to='#',verbose_name='ImagenP')
+    website = models.URLField()
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
 
 class Comentarios(models.Model):
     nombrec = models.CharField(max_length=50,verbose_name='NombreC')

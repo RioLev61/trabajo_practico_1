@@ -69,78 +69,6 @@ class ContactoForm(forms.Form):
             msg = "Debe agregar la palabara 'suscripcion' al asunto."
             self.add_error('asunto', msg)
 
-
-class UsuarioForm(forms.ModelForm):
-
-    class Meta:
-        model=Usuario
-        fields=['nombre','apellido','email','password','username']
-        widgets = {
-            'nombre': forms.TextInput(attrs={'class':'form-control'}),
-            'apellido': forms.TextInput(attrs={'class':'form-control'}),
-            'email': forms.EmailInput(attrs={'class':'form-control'}),
-            'password': forms.TextInput(attrs={'class':'form-control'}),
-            'username': forms.TextInput(attrs={'class':'form-control'}),
-            
-        }
-
-
-
-class PosteoForm(forms.Form):
-    class Meta:
-        model=Posteo
-        fields= ['titulo','resumen', 'fecha', 'imagenpos', 'articulo']
-
-    nombre=forms.CharField(
-        label='Titulo', 
-        widget=forms.TextInput(attrs={'class':'form-control'})
-    )
-    nombre=forms.CharField(
-        label='Resumen', 
-        widget=forms.TextInput(attrs={'class':'form-control'})
-    )
-    fecha=forms.DateField(
-        label='Fecha Inicio', 
-        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
-    )
-    articulo = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
-    )
-    """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
-    quiero mostrar en el selector"""
-    categoria = forms.ModelChoiceField(
-        queryset=Categoria.objects.filter(baja=False),
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    imagenpos = forms.ImageField(
-        widget=forms.FileInput(attrs={'class':'form-control'})
-    )
-
-'''
-
-
-class ComentariosForm(forms.Form):
-    class Meta:
-    model=Comentarios
-    fields= ['nombre', 'fecha_inicio', 'descripcion']
-
-    nombre=forms.CharField(
-        label='Nombre', 
-        widget=forms.TextInput(attrs={'class':'form-control'})
-    )
-    fecha_inicio=forms.DateField(
-        label='Fecha Inicio', 
-        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
-    )
-    descripcion = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
-
-
-'''
-
-
-
-
 class CategoriaForm(forms.Form):
 
       # nombre = forms.CharField(error_messages={'required':'Hello! no te olvide de mi!'})
@@ -166,3 +94,76 @@ class CategoriaFormValidado(CategoriaForm):
         if nombre.upper() == 'ORIGAMI':
             raise ValidationError('Codo a Codo no dicta cursos de esta temática')
         return nombre
+
+
+class PosteoForm(forms.Form):
+    class Meta:
+        model=Posteo
+        fields= ['titulo','resumen', 'fecha', 'imagenpos', 'articulo']
+
+    titulo=forms.CharField(
+        label='Titulo', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    resumen=forms.CharField(
+        label='Resumen', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    fecha=forms.DateField(
+        label='Fecha Ingreso', 
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+    )
+    articulo = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
+    )
+    """Se utiliza ModelChoiceField para poder realizar un filtrado de lo que
+    quiero mostrar en el selector"""
+    categoria = forms.ModelChoiceField(
+        queryset=Categoria.objects.filter(baja=False),
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    imagenpos = forms.ImageField(
+        widget=forms.FileInput(attrs={'class':'form-control'})
+    )
+
+class UsuarioForm(forms.ModelForm):
+
+    class Meta:
+        model=Usuario
+        fields=['nombre','apellido','email','password','username']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class':'form-control'}),
+            'apellido': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.EmailInput(attrs={'class':'form-control'}),
+            'password': forms.TextInput(attrs={'class':'form-control'}),
+            'username': forms.TextInput(attrs={'class':'form-control'}),
+            
+        }
+
+
+
+'''
+
+
+class ComentariosForm(forms.Form):
+    class Meta:
+    model=Comentarios
+    fields= ['nombre', 'fecha_ingreso', 'descripcion']
+
+    nombre=forms.CharField(
+        label='Nombre', 
+        widget=forms.TextInput(attrs={'class':'form-control'})
+    )
+    fecha_inicio=forms.DateField(
+        label='Fecha Ingreso', 
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+    )
+    descripcion = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
+
+
+'''
+
+
+
+
