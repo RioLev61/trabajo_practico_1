@@ -69,7 +69,7 @@ class ContactoForm(forms.Form):
             msg = "Debe agregar la palabara 'suscripcion' al asunto."
             self.add_error('asunto', msg)
 
-class CategoriaForm(forms.Form):
+class CategoriaForm(forms.ModelForm):
 
       # nombre = forms.CharField(error_messages={'required':'Hello! no te olvide de mi!'})
 
