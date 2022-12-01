@@ -55,7 +55,7 @@ class Posteo(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre
+        return self.titulo
     
     def delete(self,using=None,keep_parents=False):
         self.imagenpos.storage.delete(self.imagenpos.name) #borrado fisico

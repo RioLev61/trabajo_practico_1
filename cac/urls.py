@@ -1,7 +1,8 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',views.index,name='inicio'),
@@ -26,6 +27,14 @@ urlpatterns = [
     path('administracion/usuarios/editar/<int:id_curso>', views.usuarios_editar,name='posteos_editar'),
     path('administracion/usuarios/eliminar/<int:id_curso>', views.usuarios_eliminar,name='posteos_eliminar'),
 
+    
+    path('cuentas/registrarse', views.usuarios_index, name='registrarse'),
+
+    path('account/login/',auth_views.LoginView.as_view(template_name='cac/publica/login.html')),
+    # path('account/logout/',
+    #      auth_views.LogoutView.as_view(template_name='cac/publica/logout.html'), name='logout'),
+    path('account/password_change/',auth_views.PasswordChangeView.as_view(success_url='/')),
+    path('account/',include('django.contrib.auth.urls')),
 
 
     path('hola_mundo',views.hola_mundo),

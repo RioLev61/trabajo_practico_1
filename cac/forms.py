@@ -2,6 +2,9 @@ from django import forms
 from django.forms import ValidationError
 from .models import Categoria, Usuario, Posteo, Comentarios
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 def solo_caracteres(value):
     if any(char.isdigit() for char in value ):
         raise ValidationError('El nombre no puede contener números. %(valor)s',
@@ -141,7 +144,10 @@ class UsuarioForm(forms.ModelForm):
         }
 
 
-
+class RegistrarUsuarioForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
 '''
 
 

@@ -6,12 +6,19 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.template import loader
-from cac.forms import ContactoForm, PosteoForm,CategoriaForm,CategoriaFormValidado, UsuarioForm
+from cac.forms import ContactoForm, PosteoForm,CategoriaForm,CategoriaFormValidado, UsuarioForm,RegistrarUsuarioForm
 from cac.models import Categoria, Posteo, Usuario
 
 from django.contrib import messages
 from django.views.generic import ListView
 from django.views import View
+
+from django.conf import settings
+
+from  django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -107,7 +114,7 @@ def contacto(request):
 
 
 
-   
+@login_required(login_url=settings.LOGIN_URL) 
 def index_administracion(request):
     variable = 'test_variable'
     return render(request,'cac/administracion/index_administracion.html',{'variable':variable})
@@ -246,6 +253,40 @@ class CategoriaView(View):
             form.save()
             return redirect('categorias_index')
         return render(request,self.template_name,{'formulario':form})
+
+    def cac_registrarse(request):
+        if request.method == 'POST':
+            form = RegistrarUsuarioForm(request.POST)
+            if form.is_valid():
+                form.save()
+            messages.success(
+                request, f'Tu cuenta fue creada con éxito! Ya te podes loguear en el sistema.')
+            return redirect('login')
+        else:
+            form = RegistrarUsuarioForm()
+        return render(request, 'cac/publica/registrarse.html', {'form': form})
+
+
+    def cac_login(request):
+        if request.method == 'POST':
+        # AuthenticationForm_can_also_be_used__
+           username = request.POST['username']
+           password = request.POST['password']
+           user = authenticate(request, username=username, password=password)
+           if user is not None:
+                form = login(request, user)
+                nxt = request.GET.get("next",None)
+                messages.success(request, f' Bienvenido/a {username} !!')
+                if nxt is None:
+                   return redirect('inicio')
+                else:
+                   return redirect(nxt)
+        else:    
+            form = AuthenticationForm()  
+        return render(request, 'cac/publica/registrarse.html', {'form': form})
+
+    
+  
 
 
 
