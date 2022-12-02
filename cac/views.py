@@ -168,6 +168,10 @@ def posteos_nuevo(request):
     #Si la petición es por GET
     formulario = PosteoForm(request.POST or None,request.FILES or None)
     if formulario.is_valid():
+        # AQUI SERIA EL CODIGO SI NECEISTAS QUE SEA EL USUARIO QUE ESTA GUARDADO EN SESSION
+        # fs= formulario.save(commit=False)
+        # fs.usuario= request.user
+        # fs.save()
         formulario.save()
         messages.success(request,'Se ha creado el post correctamente')          
         return redirect('posteos_index')

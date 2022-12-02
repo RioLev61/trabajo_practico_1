@@ -4,6 +4,7 @@ from .models import Categoria, Usuario, Posteo, Comentarios
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from datetime import datetime
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value ):
@@ -99,10 +100,10 @@ class CategoriaFormValidado(CategoriaForm):
         return nombre
 
 
-class PosteoForm(forms.Form):
+class PosteoForm(forms.ModelForm):
     class Meta:
         model=Posteo
-        fields= ['titulo','resumen', 'fecha', 'imagenpos', 'articulo']
+        fields= ['titulo','resumen', 'fecha', 'imagenpos', 'articulo', 'categoria']
 
     titulo=forms.CharField(
         label='Titulo', 
@@ -114,7 +115,7 @@ class PosteoForm(forms.Form):
     )
     fecha=forms.DateField(
         label='Fecha Ingreso', 
-        widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date','value':datetime.today().strftime('%Y-%m-%d')})
     )
     articulo = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 5,'class':'form-control'})
